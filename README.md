@@ -14,3 +14,7 @@ fancyPrompt> copy bin\release\<your runtime identifier>\mapalittle(.exe) <yourto
 ```
 fancyPrompt> mapalittle --help
 ```
+
+> **NOTE** <br />
+> The assembly name was changed from **MapEvens** to **mapalittle**, which is why there is a small discrepancy between the project name and the output assembly name. <br />
+> Also note that the project is configured to be a self-hosted .net core application, hence the (rather) large size of the executable.
