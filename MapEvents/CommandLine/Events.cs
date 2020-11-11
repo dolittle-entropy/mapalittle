@@ -15,10 +15,11 @@ namespace MapEvents.CommandLine
         public Task OnExecute(CommandLineApplication app)
         {
             app.ShowVersion();
-            System.Console.WriteLine(Environment.NewLine);
+            Console.WriteLine(Environment.NewLine);
             PrintChoicesMade();
             Out.Dump($"Performing DLL discovery...");
             DllDiscovery.LoadDllFiles(InputFolder);
+
 
             var eventType = DllDiscovery.FindEventTypeInDlls();
             if (!eventType.Found)
