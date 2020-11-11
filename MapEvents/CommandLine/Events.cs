@@ -47,7 +47,7 @@ namespace MapEvents.CommandLine
             if (string.IsNullOrEmpty(InputFolder))
             {
                          
-                Out.Dump("Input Folder : Current Folder");
+                Out.Dump("Input Folder : Current Directory");
             }
             else
             {

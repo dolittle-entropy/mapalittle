@@ -1,4 +1,5 @@
 ﻿using MapEvents.CommandLine;
+using MapEvents.Processors;
 using McMaster.Extensions.CommandLineUtils;
 
 using System;
@@ -10,7 +11,7 @@ namespace MapEvents
     [Subcommand(
         typeof(Events)
         )]
-    public class Program 
+    public class Program
     {
         public static int Main(string[] args) 
             => CommandLineApplication.Execute<Program>(args);
@@ -18,7 +19,7 @@ namespace MapEvents
         private void OnExecute(CommandLineApplication app)
         {
             app.ShowHelp();
-            Console.WriteLine("Gotta choose a command!");
+            Out.Fail("No command given.");
         }
     }
 }
