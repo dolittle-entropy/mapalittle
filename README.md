@@ -1,5 +1,7 @@
 # Mapalittle
 Command line tool to generate nodes and edges data files from a Dolittle solution. Also reports on simple issues.
+The tool is written with multi-platform targets in mind, and should run fine on windows, linux and mac.
+Please report any issues and/or feature requests here. 
 
 ## Getting started
 
