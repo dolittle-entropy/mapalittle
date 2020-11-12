@@ -2,6 +2,12 @@
 Command line tool to generate nodes and edges data files from a Dolittle solution. Also reports on simple issues.
 
 ## Getting started
+
+### Requirements
+- [Dotnet 5.0](https://dotnet.microsoft.com/download/dotnet/5.0)
+- Some form of C# compiler and IDE
+
+### Instructions
 - Clone the Repository to your computer
 - build the project with `dotnet build -c release`
 - Include the released outputfolder `bin\release\<your platform>\Net5.0` in your path
@@ -10,7 +16,7 @@ Command line tool to generate nodes and edges data files from a Dolittle solutio
 fancyPrompt> mapalittle --help
 ```
 
-### Sample Usage
+#### Sample Usage
 ```
 C:> mapalittle events -i "E:\dev\MyProject\bin\Debug\.Net5.0" -o "C:\ReportData" --prefer-json
 ```
