@@ -1,4 +1,4 @@
-# mapalittle
+# Mapalittle
 Command line tool to generate nodes and edges data files from a Dolittle solution. Also reports on simple issues.
 
 ## Getting started
@@ -17,6 +17,7 @@ fancyPrompt> mapalittle --help
 ```
 
 #### Sample Usage
+Map events in the `MyProject` outputfolder and output the datafiles to the folder `C:\ReportData`. The output is written as JSON files.
 ```
 C:> mapalittle events -i "E:\dev\MyProject\bin\Debug\.Net5.0" -o "C:\ReportData" --prefer-json
 ```
