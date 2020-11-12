@@ -21,6 +21,9 @@ Map events in the `MyProject` outputfolder and output the datafiles to the folde
 ```
 C:> mapalittle events -i "E:\dev\MyProject\bin\Debug\.Net5.0" -o "C:\ReportData" --prefer-json
 ```
+The command above produces two files: 
+* `C:\ReportData\graphNodes.json`
+* `C:\ReportData\graphEdges.json`
 
 > **NOTE on Assembly Name** <br />
 > The assembly name was changed from **MapEvens** to **mapalittle**, which is why there is a small discrepancy between the project name and the output assembly name. <br />
