@@ -130,6 +130,39 @@ namespace MapEvents.Processors
 
         public static void WriteOutputFiles(string outputFolder, bool preferJson)
         {
+            string realOutputFolder = DetermineOuputFolder(outputFolder);
+            if (!Directory.Exists(realOutputFolder))
+            {
+                Out.Fail($"Destination folder '{realOutputFolder}' does not exist");
+            }
+            UpdateAllWeights();
+
+            List<IdentifiedEntity> entities = CombineEventsAndHandlersIntoListOfIdentifiedEntities();
+
+            ExportFilesToSelectedFormat(preferJson, realOutputFolder, entities);
+        }
+
+        private static void ExportFilesToSelectedFormat(bool preferJson, string realOutputFolder, List<IdentifiedEntity> entities)
+        {
+            if (preferJson)
+            {
+                OutputJsonFiles(realOutputFolder, entities);
+            }
+            else
+            {
+                OutputCsvFiles(realOutputFolder, entities);
+            }
+        }
+
+        private static List<IdentifiedEntity> CombineEventsAndHandlersIntoListOfIdentifiedEntities()
+        {
+            var entities = _dolittleEvents.Select(e => (IdentifiedEntity)e).ToList();
+            entities.AddRange(_dolittleEventHandlers.Select(h => h as IdentifiedEntity));
+            return entities;
+        }
+
+        private static string DetermineOuputFolder(string outputFolder)
+        {
             string realOutputFolder;
 
             if (string.IsNullOrEmpty(outputFolder))
@@ -141,11 +174,11 @@ namespace MapEvents.Processors
                 realOutputFolder = outputFolder;
             }
 
-            if (!Directory.Exists(realOutputFolder))
-            {
-                Out.Fail($"Destination folder '{realOutputFolder}' does not exist");
-            }
+            return realOutputFolder;
+        }
 
+        private static void UpdateAllWeights()
+        {
             foreach (var evt in _dolittleEvents)
             {
                 evt.Weight = evt.Handlers.Count;
@@ -154,18 +187,6 @@ namespace MapEvents.Processors
             foreach (var handler in _dolittleEventHandlers)
             {
                 handler.Weight = handler.Events.Count;
-            }
-
-            var entities = _dolittleEvents.Select(e => (IdentifiedEntity) e).ToList();
-            entities.AddRange(_dolittleEventHandlers.Select(h => h as IdentifiedEntity));
-
-            if (preferJson)
-            {
-                OutputJsonFiles(realOutputFolder, entities);
-            }
-            else
-            {
-                OutputCsvFiles(realOutputFolder, entities);
             }
         }
 
@@ -181,9 +202,9 @@ namespace MapEvents.Processors
                     {
                         _dolittleEvents.Add(new DolittleEvent
                         {
-                            Id = ++counter,
-                            Name = type.Name,
-                            NameSpace = type.Namespace,
+                            Id           = ++counter,
+                            Name         = type.Name,
+                            NameSpace    = type.Namespace,
                             AssemblyName = assembly.GetName().Name,
                             AssemblyPath = assembly.Location
                         });
@@ -208,11 +229,11 @@ namespace MapEvents.Processors
                         {
                             _dolittleEvents.Add(new DolittleEvent
                             {
-                                Id = ++counter,
+                                Id           = ++counter,
                                 AssemblyName = assembly.GetName().Name,
                                 AssemblyPath = assembly.Location,
-                                Name = matchingType.Name,
-                                NameSpace = matchingType.Namespace
+                                Name         = matchingType.Name,
+                                NameSpace    = matchingType.Namespace
                             });
                         }
                     }
@@ -231,8 +252,8 @@ namespace MapEvents.Processors
                 {
                     edges.Add(new Edge
                     {
-                        From = evt.Id,
-                        To = handler.Id
+                        Source = evt.Id,
+                        Target = handler.Id
                     });
                 }
             }
@@ -328,9 +349,9 @@ namespace MapEvents.Processors
                         {
                             var eventHandler = new DolittleEventHandler
                             {
-                                Id = ++counter,
-                                Name = type.Name,
-                                NameSpace = type.Namespace,
+                                Id           = ++counter,
+                                Name         = type.Name,
+                                NameSpace    = type.Namespace,
                                 AssemblyName = assembly.GetName().Name,
                                 AssemblyPath = assembly.Location
                             };
@@ -451,10 +472,10 @@ namespace MapEvents.Processors
 
             var edges = GetAllEdges();
             lines = new List<string>();
-            lines.Add("From;To");
+            lines.Add("Source;Target");
             foreach (var edge in edges)
             {
-                lines.Add($"{edge.From};{edge.To}");
+                lines.Add($"{edge.Source};{edge.Target}");
             }
             fileName = Path.Combine(realOutputFolder, edgesFilename);
             File.WriteAllLines(fileName, lines);
