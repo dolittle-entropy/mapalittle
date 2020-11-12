@@ -10,6 +10,11 @@ Command line tool to generate nodes and edges data files from a Dolittle solutio
 fancyPrompt> mapalittle --help
 ```
 
+### Sample Usage
+```
+C:> mapalittle events -i "E:\dev\MyProject\bin\Debug\.Net5.0" -o "C:\ReportData" --prefer-json
+```
+
 > **NOTE on Assembly Name** <br />
 > The assembly name was changed from **MapEvens** to **mapalittle**, which is why there is a small discrepancy between the project name and the output assembly name. <br />
 
