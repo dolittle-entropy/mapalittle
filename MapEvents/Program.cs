@@ -2,8 +2,6 @@
 using MapEvents.Processors;
 using McMaster.Extensions.CommandLineUtils;
 
-using System;
-
 namespace MapEvents
 {
     [Command(Name = "mapalittle", Description ="Utility for mapping node/edge data and detecting simple issues")]
