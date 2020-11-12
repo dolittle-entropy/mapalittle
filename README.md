@@ -4,7 +4,7 @@ Command line tool to generate nodes and edges data files from a Dolittle solutio
 ## Getting started
 - Clone the Repository to your computer
 - build the project with `dotnet build -c release`
-- Include the `bin\release\<your platform>\Net5.0` in your path **PATH**: 
+- Include the released outputfolder `bin\release\<your platform>\Net5.0` in your path
 - Start using `mapalittle` :
 ```
 fancyPrompt> mapalittle --help
