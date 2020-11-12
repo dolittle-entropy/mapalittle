@@ -2,8 +2,8 @@
   "profiles": {
     "MapEvents": {
       "commandName": "Project",
-      "commandLineArgs": "events -o graphing -j",
-      "workingDirectory": "E:\\dev\\dolittle\\kunder\\aksio\\ProsjektLiv\\Source\\Pricing\\Core\\bin\\Debug\\netcoreapp3.1"
+      "commandLineArgs": "events -o graphs -j",
+      "workingDirectory": "E:\\dev\\dolittle\\learning\\Kitchenator\\src\\Applications\\ASPNet\\Kitchenator.Web.PropertyManager\\bin\\Debug\\net5.0"
     }
   }
 }
